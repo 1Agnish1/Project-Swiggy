@@ -1,4 +1,5 @@
 //first div: logo of swiggy
+import {Link} from "react-router-dom"
 
 function Header() {
   return (
@@ -55,9 +56,9 @@ function Header() {
         </div>
       </div>
       <div className="max-w-[80%] container mx-auto flex">
-        <a href="https://www.swiggy.com/restaurants">
+        <Link to={"/restaurant"}>
           <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/MERCHANDISING_BANNERS/IMAGES/MERCH/2024/8/1/fa01e85b-3057-482d-9523-5289722b1df2_Food4BU.png"></img>
-        </a>
+        </Link>
         <a href="https://www.swiggy.com/instamart?entryId=1234&entryName=mainTileEntry4&v=1">
           <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/MERCHANDISING_BANNERS/IMAGES/MERCH/2024/8/16/ca34e375-f1bd-4a2e-a3e7-0a20833be83b_IM4BU1.png"></img>
         </a>
