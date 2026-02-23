@@ -2,7 +2,7 @@ import {Link} from "react-router-dom"
 export default function RestCard({ restInfo }) {
   return (
     <Link to={"/city/delhi/"+restInfo?.info?.id}>
-      <div className="max-w-[288px]  mx-auto mb-2 transform transition duration-200 hover:scale-95">
+      <div className="max-w-[288px]  mb-2 transform transition duration-200 hover:scale-95">
         <img
           className="w-72 h-44 object-cover rounded-xl"
           src={
@@ -10,8 +10,8 @@ export default function RestCard({ restInfo }) {
             restInfo.info.cloudinaryImageId
           }
         ></img>
-        <div className="w-[95%] mx-auto mt-3">
-          <div className=" text-xl font-bold  ">{restInfo?.info?.name}</div>
+        <div className=" w-[95%] mx-auto mt-3">
+          <div className=" text-xl font-bold line-clamp-1 ">{restInfo?.info?.name}</div>
           <div className="flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ export default function RestCard({ restInfo }) {
               {restInfo?.info?.sla?.slaString}
             </span>
           </div>
-          <div className="text-gray-600 text-xl mt-1 h-7  overflow-hidden">
+          <div className="text-gray-600 text-xl line-clamp-1">
             {restInfo?.info?.cuisines.join(" ")}
           </div>
         </div>
