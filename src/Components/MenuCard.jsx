@@ -1,7 +1,7 @@
 import RestInfo from "./RestInfo";
 import { useState } from "react";
 
-function MenuCard({ menuItems, foodselected, searchText }) {
+function MenuCard({ menuItems, foodselected, searchText }) { //here the menuItems come one by one and the entire process happens with each menuItems one by one 
   const [isOpen, setIsOpen] = useState(true);
  
   // 🔍 Detect search mode safely
