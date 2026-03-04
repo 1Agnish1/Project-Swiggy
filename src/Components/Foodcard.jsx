@@ -1,6 +1,4 @@
-
-
-function Foodcard({foodData}) {
+function Foodcard({ foodData }) {
   return (
     <>
       <a href={foodData?.action?.link}>
@@ -16,4 +14,4 @@ function Foodcard({foodData}) {
   );
 }
 
-export default Foodcard
+export default Foodcard;

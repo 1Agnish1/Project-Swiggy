@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import RestCard from "./RestCard";
-import Shimmer from './Shimmer';
-
-
+import Shimmer from "./Shimmer";
 
 export default function Restaurant() {
   const [RestData, setRestData] = useState([]);
@@ -25,16 +23,13 @@ export default function Restaurant() {
     fetchData();
   }, []);
 
-  if(RestData.length==0)
-    return <Shimmer/>
-
-
+  if (RestData.length == 0) return <Shimmer />;
 
   return (
-  <div className="grid grid-cols-4 gap-5 w-[80%] mx-auto mt-20">
-  {RestData.slice(0, 12).map((restInfo) => (
-    <RestCard key={restInfo.info.id} restInfo={restInfo} />
-  ))}
-</div>
+    <div className="grid grid-cols-4 gap-5 w-[80%] mx-auto mt-20">
+      {RestData.slice(0, 12).map((restInfo) => (
+        <RestCard key={restInfo.info.id} restInfo={restInfo} />
+      ))}
+    </div>
   );
 }

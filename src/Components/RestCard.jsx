@@ -1,7 +1,7 @@
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 export default function RestCard({ restInfo }) {
   return (
-    <Link to={"/city/delhi/"+restInfo?.info?.id}>
+    <Link to={"/city/delhi/" + restInfo?.info?.id}>
       <div className="max-w-[288px]  mb-2 transform transition duration-200 hover:scale-95">
         <img
           className="w-72 h-44 object-cover rounded-xl"
@@ -11,7 +11,9 @@ export default function RestCard({ restInfo }) {
           }
         ></img>
         <div className=" w-[95%] mx-auto mt-3">
-          <div className=" text-xl font-bold line-clamp-1 ">{restInfo?.info?.name}</div>
+          <div className=" text-xl font-bold line-clamp-1 ">
+            {restInfo?.info?.name}
+          </div>
           <div className="flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"

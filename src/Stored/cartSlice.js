@@ -3,7 +3,7 @@ const cart = createSlice({
     name: 'cartslice',
     initialState: {
         items: [],//this is the initial state
-        count:0,
+        count: 0,
     },
     reducers: {
         addItems: (state, action) => {
@@ -13,7 +13,7 @@ const cart = createSlice({
         incrementItems: (state, action) => {
             const element = state.items.find(item => item.id === action.payload.id);
             element.quantity += 1;
-            state.count++;  
+            state.count++;
         },
         decrementItems: (state, action) => {
             const element = state.items.find(item => item.id === action.payload.id);

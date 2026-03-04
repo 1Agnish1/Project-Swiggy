@@ -1,13 +1,13 @@
-import RestHeader from "./RestHeader"
-import {Outlet} from "react-router-dom"
+import RestHeader from "./RestHeader";
+import { Outlet } from "react-router-dom";
 
 function SecondaryHome() {
   return (
     <>
-    <RestHeader></RestHeader>
-    <Outlet></Outlet>
+      <RestHeader></RestHeader>
+      <Outlet></Outlet>
     </>
-  )
+  );
 }
 
-export default SecondaryHome
+export default SecondaryHome;

@@ -1,6 +1,3 @@
-
-
-
 function Shimmer() {
   return (
     <>
@@ -130,4 +127,4 @@ function Shimmer() {
   );
 }
 
-export default Shimmer
+export default Shimmer;

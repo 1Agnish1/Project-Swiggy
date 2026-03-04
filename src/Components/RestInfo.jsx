@@ -1,27 +1,22 @@
 import { useState } from "react";
 import { addItems, incrementItems, decrementItems } from "../Stored/cartSlice";
-import {useDispatch,useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 
 function RestInfo({ restData }) {
-  
   const dispatch = useDispatch();
-    const items = useSelector(state=>state.cartslice.items);
-     const element = items.find((item) => item.id === restData.id);
-     const count = element ? element.quantity : 0;
-   function handleAdditems(){
-  
+  const items = useSelector((state) => state.cartslice.items);
+  const element = items.find((item) => item.id === restData.id);
+  const count = element ? element.quantity : 0;
+  function handleAdditems() {
     dispatch(addItems(restData));
-    }
-     function handleIncrementItems(){
-      
-        dispatch(incrementItems(restData));
-      }
-     function handleDecrementItems() {
-       
-       dispatch(decrementItems(restData));
-     }//In all the above three cases we are sending the object restData to the store in which there will be reducer functions to perform task accordingly
+  }
+  function handleIncrementItems() {
+    dispatch(incrementItems(restData));
+  }
+  function handleDecrementItems() {
+    dispatch(decrementItems(restData));
+  } //In all the above three cases we are sending the object restData to the store in which there will be reducer functions to perform task accordingly
 
-  
   return (
     <>
       <div className="flex w-full justify-between mb-2 pb-2">

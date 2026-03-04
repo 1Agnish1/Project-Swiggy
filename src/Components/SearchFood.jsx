@@ -17,15 +17,15 @@ function SearchFood() {
 
       const regularCards =
         data?.data?.cards?.find(
-          (card) => card?.groupedCard?.cardGroupMap?.REGULAR?.cards // here find() will return the first card that contains -> groupedCard?.cardGroupMap?.REGULAR?.cards
-        )?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];//if it doesn't found anything return an empty array
+          (card) => card?.groupedCard?.cardGroupMap?.REGULAR?.cards, // here find() will return the first card that contains -> groupedCard?.cardGroupMap?.REGULAR?.cards
+        )?.groupedCard?.cardGroupMap?.REGULAR?.cards || []; //if it doesn't found anything return an empty array
 
       // ✅ extract only menu sections
       const menuSections = regularCards
         .map((item) => item?.card?.card)
         .filter(
           (card) => card?.title && card.title.toLowerCase() !== "recommended",
-        );// here filter() sees that wether a card has a title and also if the title is 'recommended' don't include it 
+        ); // here filter() sees that wether a card has a title and also if the title is 'recommended' don't include it
 
       setMenuData(menuSections);
     }
@@ -45,8 +45,8 @@ function SearchFood() {
       />
 
       {/* ✅ SHOW NOTHING UNTIL 2 CHARACTERS */}
-      {searchText.length >= 2 && (  //conditional rendering
-        <div >
+      {searchText.length >= 2 && ( //conditional rendering
+        <div>
           {menuData.map((menu) => (
             <MenuCard
               key={menu?.title}

@@ -1,16 +1,14 @@
-import { imageGridCards } from "../Utils/FoodData"
+import { imageGridCards } from "../Utils/FoodData";
 
-import Foodcard from "./FoodCard";
+import Foodcard from "./Foodcard";
 function FoodOption() {
   return (
-  
-      <div className="w-[80%] container mx-auto flex flex-wrap mt-10 gap-5">
-        {
-            imageGridCards.map((foodData)=><Foodcard key={foodData.id} foodData={foodData}></Foodcard>)
-        }
-      </div>
-    
+    <div className="w-[80%] container mx-auto flex flex-wrap mt-10 gap-5">
+      {imageGridCards.map((foodData) => (
+        <Foodcard key={foodData.id} foodData={foodData}></Foodcard>
+      ))}
+    </div>
   );
 }
 
-export default FoodOption
+export default FoodOption;

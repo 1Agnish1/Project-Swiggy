@@ -5,13 +5,13 @@ import DineOption from "./DineOption.jsx";
 
 function Home() {
   return (
-   <>
-   <Header />
-   <FoodOption />
-   <GroceryOption />
-   <DineOption />
-   </>
-  )
+    <>
+      <Header />
+      <FoodOption />
+      <GroceryOption />
+      <DineOption />
+    </>
+  );
 }
 
-export default Home
+export default Home;

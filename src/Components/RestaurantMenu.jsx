@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function RestaurantMenu() {
   let { id } = useParams();
-  
+
   const [selected, setSelected] = useState(null);
   console.log(id);
   const [RestData, setRestData] = useState([]);
@@ -33,7 +33,9 @@ function RestaurantMenu() {
     <div>
       <div className="w-[80%] mx-auto mt-20 mb-20">
         <Link to={`/city/delhi/${id}/search`}>
-        <p className="w-full text-center py-4 rounded-4xl bg-gray-200 text-2xl">Search for Dishes</p>
+          <p className="w-full text-center py-4 rounded-4xl bg-gray-200 text-2xl">
+            Search for Dishes
+          </p>
         </Link>
       </div>
       <div className="w-[80%] mx-auto mt-20 mb-20">
@@ -51,7 +53,7 @@ function RestaurantMenu() {
         </button>
       </div>
       <div className="w-[80%] mx-auto">
-        {RestData.slice(1,14).map((menuItems) => (
+        {RestData.slice(1, 14).map((menuItems) => (
           <MenuCard
             key={menuItems?.card?.card?.title}
             menuItems={menuItems?.card?.card}

@@ -1,9 +1,7 @@
-
-
-function DineCard({RestData}) {
- return (
-        <div className="max-w-sm flex-none">
-       <a target="_blank" href={RestData.cta.link}>
+function DineCard({ RestData }) {
+  return (
+    <div className="max-w-sm flex-none">
+      <a target="_blank" href={RestData.cta.link}>
         <div className="relative">
           <img
             className="w-80 h-50 object-cover"
@@ -14,7 +12,7 @@ function DineCard({RestData}) {
             alt="Restaurant"
           />
           {/* Gradient overlay behind the text */}
-          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-linear-to-t from-black to-transparent"></div>
           {/* Text with higher z-index */}
           <p className="absolute bottom-2 left-2 text-xl text-white z-10">
             {RestData.info.name}
@@ -23,12 +21,9 @@ function DineCard({RestData}) {
             {RestData?.info?.rating?.value}
           </p>
         </div>
-        </a>
-      </div>
-      
-    )
-
+      </a>
+    </div>
+  );
 }
 
-
-export default DineCard
+export default DineCard;
