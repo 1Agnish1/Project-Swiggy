@@ -5,66 +5,85 @@ import { useDispatch, useSelector } from "react-redux";
 function RestInfo({ restData }) {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cartslice.items);
+
   const element = items.find((item) => item.id === restData.id);
   const count = element ? element.quantity : 0;
+
   function handleAdditems() {
     dispatch(addItems(restData));
   }
+
   function handleIncrementItems() {
     dispatch(incrementItems(restData));
   }
+
   function handleDecrementItems() {
     dispatch(decrementItems(restData));
-  } //In all the above three cases we are sending the object restData to the store in which there will be reducer functions to perform task accordingly
+  }
 
   return (
     <>
-      <div className="flex w-full justify-between mb-2 pb-2">
-        <div className="w-[70%]">
-          <p className="text-2xl text-gray-700 font-semibold mb-1">
+      <div className="flex w-full justify-between gap-4 mb-2 pb-2">
+        {/* LEFT CONTENT */}
+        <div className="w-[60%]">
+          <p className="text-base sm:text-xl md:text-2xl text-gray-700 font-semibold mb-1">
             {restData?.name}
           </p>
-          <p className="text-xl">
+
+          <p className="text-sm sm:text-lg md:text-xl">
             {"₹" +
               ("defaultPrice" in restData
                 ? restData?.defaultPrice / 100
                 : restData?.price / 100)}
           </p>
+
           {restData?.ratings?.aggregatedRating?.rating && (
-            <span className="text-green-700">
+            <span className="text-green-700 text-sm sm:text-base">
               ({restData.ratings.aggregatedRating.rating})
             </span>
           )}
+
           {restData?.ratings?.aggregatedRating?.ratingCountV2 && (
-            <span>({restData.ratings.aggregatedRating.ratingCountV2})</span>
+            <span className="text-sm sm:text-base">
+              ({restData.ratings.aggregatedRating.ratingCountV2})
+            </span>
           )}
-          <p>{restData?.description}</p>
+
+          <p className="text-sm sm:text-base text-gray-600 mt-1 right-10 line-clamp-3">
+            {restData?.description}
+          </p>
         </div>
-        <div className="w-[20%]  relative h-42  ">
-          <img
-            className="w-60 h-36 object-cover rounded-3xl"
-            src={
-              "https://media-assets.swiggy.com/swiggy/image/upload/" +
-              restData.imageId
-            }
-          />
-          {count == 0 ? (
-            <button
-              className="absolute bottom-1 left-20 rounded-xl text-2xl text-green-600 px-6 py-2 shadow-md border border-white bg-white"
-              onClick={() => handleAdditems()}
-            >
-              ADD
-            </button>
-          ) : (
-            <div className="absolute bottom-1 left-20 flex gap-3 text-2xl  text-green-600 px-6 py-2 shadow-md border border-white bg-white rounded-2xl">
-              <button onClick={() => handleDecrementItems()}>-</button>
-              <span>{count}</span>
-              <button onClick={() => handleIncrementItems()}>+</button>
-            </div>
-          )}
+
+        {/* IMAGE + BUTTON */}
+        <div className="w-[40%] flex flex-col items-center">
+          <div className="relative">
+            <img
+              className="w-40 sm:w-40 md:w-44 h-24 sm:h-28 md:h-32 object-cover rounded-2xl"
+              src={
+                "https://media-assets.swiggy.com/swiggy/image/upload/" +
+                restData.imageId
+              }
+            />
+
+            {count === 0 ? (
+              <button
+                className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white text-green-600 border px-4 py-1 rounded-lg shadow-md text-sm sm:text-base"
+                onClick={handleAdditems}
+              >
+                ADD
+              </button>
+            ) : (
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex gap-3 bg-white border px-4 py-1 rounded-lg shadow-md text-green-600">
+                <button onClick={handleDecrementItems}>-</button>
+                <span>{count}</span>
+                <button onClick={handleIncrementItems}>+</button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      <hr className="mb-6 mt-2"></hr>
+
+      <hr className="mb-6 mt-2" />
     </>
   );
 }

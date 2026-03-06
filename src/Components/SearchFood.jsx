@@ -17,15 +17,14 @@ function SearchFood() {
 
       const regularCards =
         data?.data?.cards?.find(
-          (card) => card?.groupedCard?.cardGroupMap?.REGULAR?.cards, // here find() will return the first card that contains -> groupedCard?.cardGroupMap?.REGULAR?.cards
-        )?.groupedCard?.cardGroupMap?.REGULAR?.cards || []; //if it doesn't found anything return an empty array
+          (card) => card?.groupedCard?.cardGroupMap?.REGULAR?.cards,
+        )?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
 
-      // ✅ extract only menu sections
       const menuSections = regularCards
         .map((item) => item?.card?.card)
         .filter(
           (card) => card?.title && card.title.toLowerCase() !== "recommended",
-        ); // here filter() sees that wether a card has a title and also if the title is 'recommended' don't include it
+        );
 
       setMenuData(menuSections);
     }
@@ -34,18 +33,27 @@ function SearchFood() {
   }, [id]);
 
   return (
-    <div className="w-[80%] mx-auto mt-20">
+    <div className="max-w-[90%] sm:max-w-[85%] md:max-w-[80%] mx-auto mt-10 sm:mt-16 md:mt-20">
       {/* SEARCH INPUT */}
       <input
-        className="w-full pl-10 py-4 text-2xl bg-gray-200 rounded-2xl border mb-10 "
+        className="
+        w-full 
+        pl-4 sm:pl-6 md:pl-10
+        py-2 sm:py-3 md:py-4
+        text-sm sm:text-lg md:text-2xl
+        bg-gray-200 
+        rounded-lg sm:rounded-xl md:rounded-2xl 
+        border 
+        mb-6 sm:mb-8 md:mb-10
+        "
         type="text"
         placeholder="Search for dishes"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
       />
 
-      {/* ✅ SHOW NOTHING UNTIL 2 CHARACTERS */}
-      {searchText.length >= 2 && ( //conditional rendering
+      {/* SHOW ONLY AFTER 2 CHARACTERS */}
+      {searchText.length >= 2 && (
         <div>
           {menuData.map((menu) => (
             <MenuCard
