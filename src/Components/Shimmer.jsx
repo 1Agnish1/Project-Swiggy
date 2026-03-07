@@ -17,12 +17,13 @@ function Shimmer() {
           <div key={index} className="w-full mb-2">
             {/* Image */}
             <div className="w-full h-32 sm:h-36 md:h-40 rounded-xl bg-gray-300 animate-pulse"></div>
-
+            {/* animate-pulse is a utility class from Tailwind CSS that adds a
+            pulsing animation to an element. */}
             {/* Text */}
-            <div className="w-[95%] mx-automt-2 sm:mt-3 ">
-              <div className="w-full h-5 bg-gray-200 animate-pulse"></div>
-              <div className="w-3/4 h-5 bg-gray-200 animate-pulse"></div>
-              <div className="w-1/2 h-5 bg-gray-200 animate-pulse"></div>
+            <div className="w-[95%] mx-auto mt-2 sm:mt-3 ">
+              <div className="w-full h-5  bg-gray-200 animate-pulse"></div>
+              <div className="w-full h-5 mt-2 bg-gray-200 animate-pulse"></div>
+              <div className="w-full h-5 mt-2 bg-gray-200 animate-pulse"></div>
             </div>
           </div>
         ))}

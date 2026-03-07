@@ -1,33 +1,47 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import MenuCard from "./MenuCard";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addMenu } from "../Stored/menuSlice";
 
 function RestaurantMenu() {
-  let { id } = useParams();
+  const { id } = useParams();
 
   const [selected, setSelected] = useState(null);
-  const [RestData, setRestData] = useState([]);
+
+  const dispatch = useDispatch();
+
+  // Get menu from Redux store
+  const menuData = useSelector((store) => store.menu.menus[id]);
+  const store = useSelector((store) => store);
+  console.log(store);
 
   useEffect(() => {
+    // If menu already exists in Redux, don't fetch again
+    if (menuData) return;
+
     async function fetchData() {
       const proxyServer = "https://cors-anywhere.herokuapp.com/";
       const swiggyAPI = `https://www.swiggy.com/mapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.7040592&lng=77.10249019999999&restaurantId=${id}`;
+
       const response = await fetch(proxyServer + swiggyAPI);
       const data = await response.json();
 
       const tempData =
         data?.data?.cards?.find(
-          (card) => card?.groupedCard?.cardGroupMap?.REGULAR?.cards,
+          (card) => card?.groupedCard?.cardGroupMap?.REGULAR?.cards
         )?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
 
-      const filterData = tempData.filter((items) => items?.card?.card?.title);
+      const filterData = tempData
+        .map((item) => item?.card?.card)
+        .filter((card) => card?.title);
 
-      setRestData(filterData);
+      // Store in Redux
+      dispatch(addMenu({ id, data: filterData }));
     }
 
     fetchData();
-  }, [id]);
+  }, [id, menuData, dispatch]);
 
   return (
     <div>
@@ -61,10 +75,10 @@ function RestaurantMenu() {
 
       {/* Menu Cards */}
       <div className="w-[90%] md:w-[80%] mx-auto flex flex-col gap-6">
-        {RestData.slice(1, 14).map((menuItems) => (
+        {menuData?.slice(1, 14).map((menuItems) => (
           <MenuCard
-            key={menuItems?.card?.card?.title}
-            menuItems={menuItems?.card?.card}
+            key={menuItems?.title}
+            menuItems={menuItems}
             foodselected={selected}
           />
         ))}
