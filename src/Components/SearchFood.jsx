@@ -1,41 +1,48 @@
 import { useParams } from "react-router-dom";
-import { useState,useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import MenuCard from "./MenuCard";
+import { addMenu } from "../Stored/menuSlice";
 
 function SearchFood() {
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   const [searchText, setSearchText] = useState("");
 
-  const menuData = useSelector((store) => store?.menu?.menus[id]) || [];
+  // Get menu from Redux
+  const menuData = useSelector((store) => store?.menu?.menus?.[id]);
+
   useEffect(() => {
-      // If menuData doesn't exist
-      if (!menuData) {
-  
-      async function fetchData() {
+    // If menu already exists, don't fetch again
+    if (menuData) return;
+
+    async function fetchData() {
+      try {
         const proxyServer = "https://cors-anywhere.herokuapp.com/";
         const swiggyAPI = `https://www.swiggy.com/mapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.7040592&lng=77.10249019999999&restaurantId=${id}`;
-  
+
         const response = await fetch(proxyServer + swiggyAPI);
         const data = await response.json();
-  
+
         const tempData =
           data?.data?.cards?.find(
-            (card) => card?.groupedCard?.cardGroupMap?.REGULAR?.cards
+            (card) => card?.groupedCard?.cardGroupMap?.REGULAR?.cards,
           )?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
-  
+
         const filterData = tempData
           .map((item) => item?.card?.card)
           .filter((card) => card?.title);
-  
+
         // Store in Redux
         dispatch(addMenu({ id, data: filterData }));
+      } catch (err) {
+        console.log("Error fetching menu:", err);
       }
-  
-      fetchData();
-    }}, [menuData]);
+    }
 
+    fetchData();
+  }, [id, menuData, dispatch]);
 
   return (
     <div className="max-w-[90%] sm:max-w-[85%] md:max-w-[80%] mx-auto mt-10 sm:mt-16 md:mt-20">
@@ -56,11 +63,11 @@ function SearchFood() {
         onChange={(e) => setSearchText(e.target.value)}
       />
 
-      {searchText.length >= 2 && (
+      {searchText.length >= 2 && menuData && (
         <div>
-          {menuData.map((menu) => (
+          {menuData.map((menu, index) => (
             <MenuCard
-              key={menu?.title}
+              key={menu?.title || index}
               menuItems={menu}
               foodselected={null}
               searchText={searchText}
