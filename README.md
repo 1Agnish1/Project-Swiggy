@@ -14,3 +14,9 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+# To handle the CORS issue
+
+I handled the CORS issue by using a proxy Server
+"https://cors-anywhere.herokuapp.com/"
+So to solve the corse problem , first access the above link given inside the code by clicking on it and then give the access 
